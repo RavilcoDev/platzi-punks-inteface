@@ -1,3 +1,5 @@
+import { useCallback, useEffect, useState } from 'react'
+// Charkra
 import {
   Flex,
   Button,
@@ -5,48 +7,55 @@ import {
   TagLabel,
   Badge,
   TagCloseButton,
-} from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
-import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
-import { connector } from "../../../config/web3";
-import { useCallback, useEffect, useState } from "react";
-import useTruncatedAddress from "../../../hooks/useTruncatedAddress";
+} from '@chakra-ui/react'
+import { AddIcon } from '@chakra-ui/icons'
+//Hooks
+import useTruncatedAddress from '../../../hooks/useTruncatedAddress'
+// Router
+import { Link } from 'react-router-dom'
+// Web3
+import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
+//Config
+import { connector } from '../../../config/web3'
 
 const WalletData = () => {
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState(0)
+
+  // web3-react
   const { active, activate, deactivate, account, error, library } =
-    useWeb3React();
+    useWeb3React()
+  // validate intansceOf error
+  const isUnsupportedChain = error instanceof UnsupportedChainIdError
 
-  const isUnsupportedChain = error instanceof UnsupportedChainIdError;
-
+  // Activate function
   const connect = useCallback(() => {
-    activate(connector);
-    localStorage.setItem("previouslyConnected", "true");
-  }, [activate]);
+    activate(connector)
+    localStorage.setItem('previouslyConnected', 'true')
+  }, [activate])
 
   const disconnect = () => {
-    deactivate();
-    localStorage.removeItem("previouslyConnected");
-  };
+    deactivate()
+    localStorage.removeItem('previouslyConnected')
+  }
 
+  //
   const getBalance = useCallback(async () => {
-    const toSet = await library.eth.getBalance(account);
-    setBalance((toSet / 1e18).toFixed(2));
-  }, [library?.eth, account]);
+    const toSet = await library.eth.getBalance(account)
+    setBalance((toSet / 1e18).toFixed(2))
+  }, [library?.eth, account])
 
   useEffect(() => {
-    if (active) getBalance();
-  }, [active, getBalance]);
+    if (active) getBalance()
+  }, [active, getBalance])
 
   useEffect(() => {
-    if (localStorage.getItem("previouslyConnected") === "true") connect();
-  }, [connect]);
+    if (localStorage.getItem('previouslyConnected') === 'true') connect()
+  }, [connect])
 
-  const truncatedAddress = useTruncatedAddress(account);
+  const truncatedAddress = useTruncatedAddress(account)
 
   return (
-    <Flex alignItems={"center"}>
+    <Flex alignItems={'center'}>
       {active ? (
         <Tag colorScheme="green" borderRadius="full">
           <TagLabel>
@@ -54,8 +63,8 @@ const WalletData = () => {
           </TagLabel>
           <Badge
             d={{
-              base: "none",
-              md: "block",
+              base: 'none',
+              md: 'block',
             }}
             variant="solid"
             fontSize="0.8rem"
@@ -67,18 +76,18 @@ const WalletData = () => {
         </Tag>
       ) : (
         <Button
-          variant={"solid"}
-          colorScheme={"green"}
-          size={"sm"}
+          variant={'solid'}
+          colorScheme={'green'}
+          size={'sm'}
           leftIcon={<AddIcon />}
           onClick={connect}
           disabled={isUnsupportedChain}
         >
-          {isUnsupportedChain ? "Red no soportada" : "Conectar wallet"}
+          {isUnsupportedChain ? 'Red no soportada' : 'Conectar wallet'}
         </Button>
       )}
     </Flex>
-  );
-};
+  )
+}
 
-export default WalletData;
+export default WalletData
