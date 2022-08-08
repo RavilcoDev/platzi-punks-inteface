@@ -28,7 +28,7 @@ const Home = () => {
       const maxSupply = await platziPunks.methods.maxSupply().call()
       const totalSupply = await platziPunks.methods.totalSupply().call()
       const dnaPreview = await platziPunks.methods
-        .deterministicPsudoRandomDNA(totalSupply, account)
+        .deterministicPseudoRandomDNA(totalSupply, account)
         .call()
       const image = await platziPunks.methods.imageByDNA(dnaPreview).call()
       setImageSrc(image)

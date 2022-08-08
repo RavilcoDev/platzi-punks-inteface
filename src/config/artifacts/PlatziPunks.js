@@ -139,7 +139,7 @@ const platziPunksArtifacts = {
           type: 'address',
         },
       ],
-      name: 'deterministicPsudoRandomDNA',
+      name: 'deterministicPseudoRandomDNA',
       outputs: [
         {
           internalType: 'uint256',
@@ -148,6 +148,25 @@ const platziPunksArtifacts = {
         },
       ],
       stateMutability: 'pure',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getAccessoriesType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
       type: 'function',
     },
     {
@@ -164,6 +183,234 @@ const platziPunksArtifacts = {
           internalType: 'address',
           name: '',
           type: 'address',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getClotheColor',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getClotheType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getEyeType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getEyebrowType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getFacialHairColor',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getFacialHairType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getGraphicType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getHairColor',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getHatColor',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getMouthType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getSkinColor',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getTopType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
         },
       ],
       stateMutability: 'view',
@@ -480,6 +727,277 @@ const platziPunksArtifacts = {
       name: 'transferFrom',
       outputs: [],
       stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_tokenId',
+          type: 'uint256',
+        },
+        {
+          internalType: 'address',
+          name: '_minter',
+          type: 'address',
+        },
+      ],
+      name: 'deterministicPseudoRandomDNA',
+      outputs: [
+        {
+          internalType: 'uint256',
+          name: '',
+          type: 'uint256',
+        },
+      ],
+      stateMutability: 'pure',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getAccessoriesType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getClotheColor',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getClotheType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getEyeType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getEyebrowType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getFacialHairColor',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getFacialHairType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getGraphicType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getHairColor',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getHatColor',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getMouthType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getSkinColor',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_dna',
+          type: 'uint256',
+        },
+      ],
+      name: 'getTopType',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
+        },
+      ],
+      stateMutability: 'view',
       type: 'function',
     },
   ],
