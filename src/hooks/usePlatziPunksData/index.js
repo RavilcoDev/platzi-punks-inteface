@@ -85,7 +85,6 @@ export const usePlatziPunksData = () => {
         getPunkData({ platziPunks, tokenId })
       )
       const tmpPunks = await Promise.all(punksPromise)
-      console.log('tmpPunks', tmpPunks)
       setPunks(tmpPunks)
       setLoading(false)
     }
@@ -97,6 +96,32 @@ export const usePlatziPunksData = () => {
 
   return {
     punks,
+    loading,
+    update,
+  }
+}
+
+export const usePlatziPunkData = (tokenId = null) => {
+  const [punk, setPunk] = useState({})
+  const [loading, setLoading] = useState(true)
+  const platziPunks = usePlatziPunks()
+
+  const update = useCallback(async () => {
+    if (platziPunks && tokenId != null) {
+      setLoading(true)
+
+      const tmpPunks = await getPunkData({ platziPunks, tokenId })
+      setPunk(tmpPunks)
+      setLoading(false)
+    }
+  }, [platziPunks, tokenId])
+
+  useEffect(() => {
+    update()
+  }, [update])
+
+  return {
+    punk,
     loading,
     update,
   }

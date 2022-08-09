@@ -7,6 +7,7 @@ import { Grid } from '@chakra-ui/react'
 // Hooks
 import { useWeb3React } from '@web3-react/core'
 import { usePlatziPunksData } from '../../hooks/usePlatziPunksData'
+import { Link } from 'react-router-dom'
 
 const Punks = () => {
   const { active } = useWeb3React()
@@ -18,7 +19,9 @@ const Punks = () => {
   ) : (
     <Grid templateColumns="repeat(auto-fill,minmax(250px,1fr))" gap={6}>
       {punks.map(({ name, image, tokenId }) => (
-        <PunksCard key={tokenId} image={image} name={name} />
+        <Link key={tokenId} to={`/punk/${tokenId}`}>
+          <PunksCard image={image} name={name} />
+        </Link>
       ))}
     </Grid>
   )
