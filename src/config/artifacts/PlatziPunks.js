@@ -1,6 +1,6 @@
 const platziPunksArtifacts = {
   address: {
-    4: process.env.REACT_APP_ADDRESS_CONTRACT_RINKEBY,
+    4: '0x7095711870120E8CfB8a92B46B7E45542dE43e7C',
   },
   abi: [
     {
