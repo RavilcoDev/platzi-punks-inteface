@@ -67,7 +67,7 @@ const getPunkData = async ({ platziPunks, tokenId }) => {
 }
 
 // Plural
-export const usePlatziPunksData = () => {
+export const usePlatziPunksData = ({ owner } = {}) => {
   const [punks, setPunks] = useState([])
   const [loading, setLoading] = useState(false)
   const platziPunks = usePlatziPunks()
@@ -76,10 +76,19 @@ export const usePlatziPunksData = () => {
     if (platziPunks) {
       setLoading(true)
 
-      const totalSupply = await platziPunks.methods.totalSupply().call()
-      const tokenIds = new Array(Number(totalSupply))
-        .fill()
-        .map((_, idx) => idx)
+      let tokenIds
+      if (owner) {
+        const balanceOf = await platziPunks.methods.balanceOf(owner).call()
+        const fooTokenIds = new Array(Number(balanceOf))
+          .fill()
+          .map((_, idx) =>
+            platziPunks.methods.tokenOfOwnerByIndex(owner, idx).call()
+          )
+        tokenIds = await Promise.all(fooTokenIds)
+      } else {
+        const totalSupply = await platziPunks.methods.totalSupply().call()
+        tokenIds = new Array(Number(totalSupply)).fill().map((_, idx) => idx)
+      }
 
       const punksPromise = tokenIds.map(async (tokenId) =>
         getPunkData({ platziPunks, tokenId })
@@ -88,7 +97,7 @@ export const usePlatziPunksData = () => {
       setPunks(tmpPunks)
       setLoading(false)
     }
-  }, [platziPunks])
+  }, [platziPunks, owner])
 
   useEffect(() => {
     update()

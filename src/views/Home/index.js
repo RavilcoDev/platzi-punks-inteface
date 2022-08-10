@@ -12,12 +12,13 @@ import { Link } from 'react-router-dom'
 import { useWeb3React } from '@web3-react/core'
 import { usePlatziPunks } from '../../hooks/usePlatziPunks'
 import { useCallback, useEffect, useState } from 'react'
+import useTruncatedAddress from '../../hooks/useTruncatedAddress'
 
 const Home = () => {
   const [imageSrc, setImageSrc] = useState('')
-  const [disponible, setDisponible] = useState(0)
   const [isMinting, setIsMinting] = useState(false)
-
+  const [maxSupply, setMaxSupply] = useState('')
+  const [totalSupply, setTotalSupply] = useState('')
   const toast = useToast()
 
   const { active, account } = useWeb3React()
@@ -31,15 +32,15 @@ const Home = () => {
         .deterministicPseudoRandomDNA(totalSupply, account)
         .call()
       const image = await platziPunks.methods.imageByDNA(dnaPreview).call()
+      setMaxSupply(maxSupply)
+      setTotalSupply(totalSupply)
       setImageSrc(image)
-      setDisponible(maxSupply - totalSupply)
     }
   }, [platziPunks, account])
 
   const mint = useCallback(() => {
     if (platziPunks) {
       setIsMinting(true)
-      console.error('account', account)
       platziPunks.methods
         .mint()
         .send({
@@ -75,6 +76,9 @@ const Home = () => {
     getPlatziPunksData()
   }, [getPlatziPunksData])
 
+  const truncatedAddress = useTruncatedAddress(account)
+  const disponible = maxSupply - totalSupply
+
   return (
     <Stack
       align={'center'}
@@ -108,7 +112,7 @@ const Home = () => {
           <Text as={'span'} color={'green.400'}>
             nunca para de aprender
           </Text>
-          <Text>Disponibles: {disponible}</Text>
+          {active && <Text>Disponibles: {disponible}</Text>}
         </Heading>
         <Text color={'gray.500'}>
           Platzi Punks es una colección de Avatares randomizados cuya metadata
@@ -160,13 +164,13 @@ const Home = () => {
               <Badge>
                 Next ID:
                 <Badge ml={1} colorScheme="green">
-                  1
+                  {totalSupply}
                 </Badge>
               </Badge>
               <Badge ml={2}>
                 Address:
                 <Badge ml={1} colorScheme="green">
-                  0x0000...0000
+                  {truncatedAddress}
                 </Badge>
               </Badge>
             </Flex>

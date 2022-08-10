@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Stack,
   Heading,
@@ -10,6 +11,7 @@ import {
   Tbody,
   Button,
   Tag,
+  useToast,
 } from '@chakra-ui/react'
 import { useWeb3React } from '@web3-react/core'
 import RequestAccess from '../../components/request-access'
@@ -17,11 +19,55 @@ import PunkCard from '../../components/punk-card'
 import Loading from '../../components/loading'
 import { usePlatziPunkData } from '../../hooks/usePlatziPunksData'
 import { useParams } from 'react-router-dom'
+import { usePlatziPunks } from '../../hooks/usePlatziPunks'
+import useTruncatedAddress from '../../hooks/useTruncatedAddress'
 
 export const Punk = () => {
-  const { active, account } = useWeb3React()
+  const { active, account, library } = useWeb3React()
   const { tokenId } = useParams()
-  const { loading, punk } = usePlatziPunkData(tokenId)
+  const { loading, punk, update } = usePlatziPunkData(tokenId)
+
+  const toast = useToast()
+  const platziPunks = usePlatziPunks()
+  const [transfering, setTransfering] = useState(false)
+
+  const transfer = () => {
+    const address = prompt('A que cuenta sera enviada la NFT')
+    const isAdrress = library.utils.isAddress(address)
+    if (!isAdrress) {
+      toast({
+        title: 'Address is not valid',
+        description: `${isAdrress} is not a ethereum Address`,
+        status: 'error',
+      })
+    } else {
+      setTransfering(true)
+      platziPunks.methods
+        .safeTransferFrom(punk.owner, address, punk.tokenId)
+        .send({ from: account })
+        .on('error', (error) => {
+          setTransfering(false)
+        })
+        .on('transactionHash', (txHash) => {
+          toast({
+            title: 'Transaction sent',
+            description: txHash,
+            status: 'info',
+          })
+        })
+        .on('receipt', () => {
+          setTransfering(false)
+          toast({
+            title: 'Transacción confirmada',
+            description: 'Nunca pares de aprender.',
+            status: 'success',
+          })
+          update()
+        })
+    }
+  }
+  const truncatedAddress = useTruncatedAddress(punk.owner)
+
   if (!active) return <RequestAccess />
 
   if (loading) return <Loading />
@@ -41,7 +87,12 @@ export const Punk = () => {
           name={punk.name}
           image={punk.image}
         />
-        <Button disabled={account !== punk.owner} colorScheme="green">
+        <Button
+          onClick={transfer}
+          disabled={account !== punk.owner}
+          colorScheme="green"
+          isLoading={transfering}
+        >
           {account !== punk.owner ? 'No eres el dueño' : 'Transferir'}
         </Button>
       </Stack>
@@ -57,7 +108,7 @@ export const Punk = () => {
         <Text fontWeight={600}>
           Owner:
           <Tag ml={2} colorScheme="green">
-            {punk.owner}
+            {truncatedAddress}
           </Tag>
         </Text>
         <Table size="sm" variant="simple">
